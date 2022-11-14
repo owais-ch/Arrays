@@ -1,0 +1,19 @@
+'''Find the median of all subarrays of a particular size.'''
+
+def findMedian(nums, n, k):
+    arr=nums[:k]
+    median=np.median(arr)
+    list1=[median]
+    
+    for i in range(1,n-k+1):
+        if ((nums[i-1]<median and nums[i+k-1]<median) or (nums[i-1]>median and nums[i+k-1]>median)) and k%2!=0:
+            #print(nums[i:i+k])
+            list1.append(median)
+        elif (nums[i-1]<median and nums[i+k-1]>median) or (nums[i-1]>median and nums[i+k-1]<median):
+            median=np.median(nums[i:i+k])
+            list1.append(median)
+        else:
+            median=np.median(nums[i:i+k])
+            list1.append(median)
+               
+    return list1
